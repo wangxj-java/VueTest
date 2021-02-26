@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-text="msg"></p>
+        <p v-html="msg"></p>
+    </div>
+
+    <div id="app2">
+        <p v-upper-text="msg"></p>
+        <p v-lower-text="msg"></p>
+    </div>
+</body>
+
+<script src="../js/vue.js"></script>
+<script>
+
+//注册自定义指令
+/**
+ * el: 指令所属的标签元素
+ * binding: 包含指令所有的相关数据
+ * 
+*/
+Vue.directive('upper-text', function(el,binding){
+    el.textContent = binding.value.toUpperCase();
+} )
+
+Vue.directive('lower-text', function(el,binding){
+    el.textContent = binding.value.toLowerCase();
+} )
+
+
+new Vue({
+    el: '#app2',
+    data: {
+        msg: 'I Love You !'  
+    }
+
+})
+
+new Vue({
+    el: '#app',
+    data() {
+        return {
+            msg: '<a href="http://www.baidu.com">百度一下</a>'
+        }
+    },
+})
+
+</script>
+</html>

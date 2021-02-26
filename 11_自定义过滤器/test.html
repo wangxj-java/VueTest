@@ -1,0 +1,20 @@
+<div id="test">
+    <p>当前时间为: {{currentTime}}</p>
+    <p>当前时间 1 为: {{currentTime | dateStr}}</p>
+    <p>当前时间 2 为: {{currentTime | dateStr('YYYY-MM-DD')}}</p>
+    <p>当前时间 3 为: {{currentTime | dateStr('HH:mm:ss')}}</p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.19.0/moment.js"></script>
+<script>
+    // 注册过滤器
+    Vue.filter('dateStr', function (value, format) {
+        return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss')
+    })
+    new Vue({
+        el: '#test',
+        data: {
+            currentTime: new Date()
+        }
+    })
+</script>

@@ -1,0 +1,50 @@
+<div id="app">
+
+    <button @click="destroyVM">销毁</button>
+    <p v-show="isShow">xxxxxxxx</p>
+
+</div>
+
+<script src="../js/vue.js" ></script>
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+          return{
+            isShow: true
+          }
+        },  
+
+        methods: {
+            destroyVM(){
+                this.$destroy()
+            }
+        },
+
+        /*
+        VM死亡之前
+        在此做一些收尾的事情
+        */
+        beforeDestroy() {
+            //清除定时器
+            clearInterval(this.intervalId)
+        },
+
+        /*
+            界面初始化显示之后调用
+            一般在此执行异步操作：发送ajax请求/启动定时器/订阅消息/绑定自定义事件监听
+        */
+        mounted() {
+            this.intervalId = setInterval(function(){
+                console.log("1111111");
+                this.isShow = !this.isShow
+            }.bind(this),1000)
+        },
+        /*
+            1.返回一个新函数
+            2.新函数会调用原函数（通过call调用）
+            3.在调用时指定原函数执行的this为bind()的第一个参数
+        */    
+    })
+
+</script> 
